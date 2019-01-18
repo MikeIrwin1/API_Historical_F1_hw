@@ -6,4 +6,6 @@ const Formula1Stats = require('./models/formula1_stats.js')
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Javascript Loaded');
 
+  const f1Data = new Formula1Stats();
+  f1Data.bindEvents();
 });
