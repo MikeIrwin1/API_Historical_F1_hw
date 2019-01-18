@@ -18,7 +18,6 @@ ContainerView.prototype.clear = function () {
 
 ContainerView.prototype.renderRaceListView = function (raceArray) {
   raceArray.forEach((race) => {
-    debugger
     const raceView = this.raceDetailItem(race);
     this.container.appendChild(raceView);
   })
