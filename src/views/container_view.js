@@ -10,6 +10,10 @@ ContainerView.prototype.bindEvents = function () {
     this.clear();
     this.renderRaceListView(event.detail);
   })
+  PubSub.subscribe('Formula1Stats:season-races-ready', (event) => {
+    this.clear();
+    this.renderRaceListView(event.detail);
+  })
 };
 
 ContainerView.prototype.clear = function () {
