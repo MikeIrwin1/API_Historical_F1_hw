@@ -12,10 +12,17 @@ Formula1Stats.prototype.bindEvents = function () {
 Formula1Stats.prototype.getData = function () {
   const url = 'http://ergast.com/api/f1.json?limit=997'
   const requestHelper = new RequestHelper(url);
-  requestHelper.get((data) => {
-    this.data = data.MRData.RaceTable.Races;
-    console.log(this.data);
+  const myPromise = requestHelper.get();
+  myPromise.then((data) => {
+    this.handleRaceData(data);
+    PubSub.publish('Formula1Stats:race-data-ready', this.data);
   })
 };
+
+Formula1Stats.prototype.handleRaceData = function (tabledata) {
+  return this.data = tabledata.MRData.RaceTable.Races;
+};
+
+
 
 module.exports = Formula1Stats;
