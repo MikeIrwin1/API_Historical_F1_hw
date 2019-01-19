@@ -1,18 +1,18 @@
 const PubSub = require('../helpers/pub_sub.js');
+const RaceDetail = require('./race_detail.js');
 
 const RaceView = function () {
 
 };
 
 RaceView.prototype.createRaceItem = function (race) {
-  const raceDetail = document.createElement('div')
-  raceDetail.classList.add('raceDetail')
+  const raceItem = document.createElement('button');
+  raceItem.classList.add('raceDetail');
+  raceItem.textContent = `Round: ${race.round} - ${race.raceName} Circuit: ${race.Circuit.circuitName}`;
 
-  const raceInfo = document.createElement('p');
-  raceInfo.textContent = `${race.season}, ${race.round}, ${race.raceName}`;
-  raceDetail.appendChild(raceInfo);
-
-  return raceDetail
+  const raceDetail = new RaceDetail(race);
+  
+  return raceItem;
 
 };
 module.exports = RaceView;

@@ -13,7 +13,6 @@ SelectView.prototype.bindEvents = function () {
   })
   this.element.addEventListener('change', (event) =>{
     const selectedSeason = event.target.value;
-    debugger
     PubSub.publish('SelectView:Season-selected', selectedSeason);
   })
 };

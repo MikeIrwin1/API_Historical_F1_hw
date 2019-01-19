@@ -9,8 +9,9 @@ const Formula1Stats = function () {
 Formula1Stats.prototype.bindEvents = function () {
   PubSub.subscribe('SelectView:Season-selected', (event) => {
     const selectedSeason = event.detail;
-    this.selectedSeasonData(selectedSeason);
-    PubSub.publish('Formula1Stats:season-races-ready', this.season);
+    this.selectedSeasonRaces(selectedSeason);
+    this.selectedSeasonDetails(selectedSeason);
+    PubSub.publish('Formula1Stats:season-details-ready', this.season);
   })
   this.getData();
 };
@@ -29,12 +30,23 @@ Formula1Stats.prototype.handleRaceData = function (tabledata) {
   return this.data = tabledata.MRData.RaceTable.Races;
 };
 
-Formula1Stats.prototype.selectedSeasonData = function (selectedSeason) {
+Formula1Stats.prototype.selectedSeasonRaces = function (selectedSeason) {
   this.season = this.data.filter((race) => {
     if (race.season === selectedSeason) {
       return race;
     };
   });
 }
+
+Formula1Stats.prototype.selectedSeasonDetails = function (selectedSeason) {
+  const url = `http://ergast.com/api/f1/${selectedSeason}/results.json?limit=1000`;
+  const requestHelper = new RequestHelper(url);
+  const myPromise = requestHelper.get();
+  myPromise.then((data) => {
+    this.handleRaceData(data);
+    console.log(this.data);
+    PubSub.publish('Formula1Stats:race-details-ready', this.data);
+  })
+};
 
 module.exports = Formula1Stats;

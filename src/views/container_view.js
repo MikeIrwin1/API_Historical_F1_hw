@@ -6,11 +6,7 @@ const ContainerView = function (container) {
 };
 
 ContainerView.prototype.bindEvents = function () {
-  PubSub.subscribe('Formula1Stats:race-data-ready', (event) => {
-    this.clear();
-    this.renderRaceListView(event.detail);
-  })
-  PubSub.subscribe('Formula1Stats:season-races-ready', (event) => {
+  PubSub.subscribe('Formula1Stats:season-details-ready', (event) => {
     this.clear();
     this.renderRaceListView(event.detail);
   })
@@ -22,12 +18,12 @@ ContainerView.prototype.clear = function () {
 
 ContainerView.prototype.renderRaceListView = function (raceArray) {
   raceArray.forEach((race) => {
-    const raceView = this.raceDetailItem(race);
+    const raceView = this.raceListItem(race);
     this.container.appendChild(raceView);
   })
 };
 
-ContainerView.prototype.raceDetailItem = function (race) {
+ContainerView.prototype.raceListItem = function (race) {
   const raceItem = new RaceView();
   return raceItem.createRaceItem(race);
 };
