@@ -4,6 +4,7 @@ const PubSub = require('../helpers/pub_sub.js');
 const Formula1Stats = function () {
   this.data;
   this.season;
+  this.seasonDetail;
 };
 
 Formula1Stats.prototype.bindEvents = function () {
@@ -43,10 +44,10 @@ Formula1Stats.prototype.selectedSeasonDetails = function (selectedSeason) {
   const requestHelper = new RequestHelper(url);
   const myPromise = requestHelper.get();
   myPromise.then((data) => {
-    this.handleRaceData(data);
-    console.log(this.data);
-    PubSub.publish('Formula1Stats:race-details-ready', this.data);
+    this.seasonDetail = data.MRData.RaceTable.Races;
+    PubSub.publish('Formula1Stats:race-details-ready', this.seasonDetail);
   })
+  debugger
 };
 
 module.exports = Formula1Stats;
