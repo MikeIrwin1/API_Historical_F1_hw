@@ -22,13 +22,13 @@ Formula1Stats.prototype.getData = function () {
   const requestHelper = new RequestHelper(url);
   const myPromise = requestHelper.get();
   myPromise.then((data) => {
-    this.handleRaceData(data);
+    this.data = this.handleRaceData(data);
     PubSub.publish('Formula1Stats:race-data-ready', this.data);
   })
 };
 
 Formula1Stats.prototype.handleRaceData = function (tabledata) {
-  return this.data = tabledata.MRData.RaceTable.Races;
+  return tabledata.MRData.RaceTable.Races;
 };
 
 Formula1Stats.prototype.selectedSeasonRaces = function (selectedSeason) {
@@ -44,7 +44,7 @@ Formula1Stats.prototype.selectedSeasonDetails = function (selectedSeason) {
   const requestHelper = new RequestHelper(url);
   const myPromise = requestHelper.get();
   myPromise.then((data) => {
-    this.seasonDetail = data.MRData.RaceTable.Races;
+    this.seasonDetail = this.handleRaceData(data);
     PubSub.publish('Formula1Stats:race-details-ready', this.seasonDetail);
   })
   debugger

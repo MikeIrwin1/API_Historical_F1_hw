@@ -7,7 +7,7 @@ const ContainerView = function (container) {
 };
 
 ContainerView.prototype.bindEvents = function () {
-  PubSub.subscribe('Formula1Stats:season-details-ready', (event) => {
+  PubSub.subscribe('Formula1Stats:race-details-ready', (event) => {
     this.clear();
     this.renderRaceListView(event.detail);
   })
@@ -20,17 +20,9 @@ ContainerView.prototype.clear = function () {
 ContainerView.prototype.renderRaceListView = function (raceArray) {
   raceArray.forEach((race) => {
     const raceView = this.raceListItem(race);
-    const raceDetailView = this.raceDetailItem(race)
+    const raceDetailView = this.raceDetailItem(race);
     this.container.appendChild(raceView);
-    // this.container.appendChild(raceDetailView);
-
-
-
-    // raceView.addEventListener('click', (event) =>{
-    //   const selectedIndex = event.target.value;
-    //   debugger
-    //   const raceDetail = this.raceDetailItem(race, selectedIndex);
-    // });
+    this.container.appendChild(raceDetailView);
   })
 };
 
@@ -40,8 +32,8 @@ ContainerView.prototype.raceListItem = function (race) {
 };
 
 
-ContainerView.prototype.raceDetailItem = function (race, index) {
-  const raceDetail = new RaceDetail(race, index);
-  return raceDetail.bindEvents();
+ContainerView.prototype.raceDetailItem = function (race) {
+  const raceDetail = new RaceDetail();
+  return raceDetail.createRaceDetail(race);
 };
 module.exports = ContainerView;
