@@ -23,9 +23,19 @@ ContainerView.prototype.renderRaceListView = function (raceArray) {
     const raceDetailView = this.raceDetailItem(race);
     this.container.appendChild(raceView);
     this.container.appendChild(raceDetailView);
-  })
-  const collapse = document.getElementsByClassName('results')
-  console.log(collapse);
+  });
+  const collapse = document.getElementsByClassName('race')
+  for (let i=0; i<collapse.length; i++) {
+    collapse[i].addEventListener('click', (event) => {
+      let content = event.target.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      }
+      else {
+        content.style.display = "block";
+      }
+    })
+  }
 };
 
 ContainerView.prototype.raceListItem = function (race) {

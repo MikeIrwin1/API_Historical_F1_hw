@@ -1,6 +1,4 @@
 const PubSub = require('../helpers/pub_sub.js');
-const RaceDetail = require('./race_detail.js');
-
 
 const RaceView = function () {
 
