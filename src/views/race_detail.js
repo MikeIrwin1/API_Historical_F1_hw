@@ -10,8 +10,8 @@ RaceDetail.prototype.createRaceDetail = function (race) {
   raceDetail.appendChild(heading);
 
   const table = this.createTable(race);
-  // raceDetail.textContent = `${race.Results[0].Driver.givenName} ${race.Results[0].Driver.familyName}`;
-  // const results = race.Results;
+  raceDetail.appendChild(table);
+  
   return raceDetail
 
 };
@@ -23,6 +23,13 @@ RaceDetail.prototype.createHeading = function () {
 };
 
 RaceDetail.prototype.createTable = function (race) {
-  const table = document.createElement('table')
+  const newTable = document.createElement('table');
+
+  for (let i=0; i<3; i++) {
+    const newRow = newTable.insertRow(-1);
+    newRow.textContent = `${race.Results[i].Driver.givenName} ${race.Results[i].Driver.familyName}`;
+  }
+  return newTable;
 };
+
 module.exports = RaceDetail;

@@ -24,6 +24,8 @@ ContainerView.prototype.renderRaceListView = function (raceArray) {
     this.container.appendChild(raceView);
     this.container.appendChild(raceDetailView);
   })
+  const collapse = document.getElementsByClassName('results')
+  console.log(collapse);
 };
 
 ContainerView.prototype.raceListItem = function (race) {
