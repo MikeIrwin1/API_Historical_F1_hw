@@ -12,6 +12,7 @@ Formula1Stats.prototype.bindEvents = function () {
     const selectedSeason = event.detail;
     this.selectedSeasonRaces(selectedSeason);
     this.selectedSeasonDetails(selectedSeason);
+    this.selectedChampionshipStandings(selectedSeason)
   })
   this.getData();
 };
@@ -45,6 +46,16 @@ Formula1Stats.prototype.selectedSeasonDetails = function (selectedSeason) {
   myPromise.then((data) => {
     this.seasonDetail = this.handleRaceData(data);
     PubSub.publish('Formula1Stats:race-details-ready', this.seasonDetail);
+  })
+};
+
+Formula1Stats.prototype.selectedChampionshipStandings = function (selectedSeason) {
+  const url = `http://ergast.com/api/f1/${selectedSeason}/driverStandings.json`;
+  const requestHelper = new RequestHelper(url);
+  const myPromise = requestHelper.get();
+  myPromise.then((data) => {
+    const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+    PubSub.publish('Formula1Stats:standings-ready', standings)
   })
 };
 

@@ -1,6 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const RaceView = require('./race_view.js');
 const RaceDetail = require('./race_detail.js');
+const ChampionshipView = require('./championship_view.js');
 
 const ContainerView = function (container) {
   this.container = container;
@@ -10,6 +11,9 @@ ContainerView.prototype.bindEvents = function () {
   PubSub.subscribe('Formula1Stats:race-details-ready', (event) => {
     this.clear();
     this.renderRaceListView(event.detail);
+    PubSub.subscribe('Formula1Stats:standings-ready', (event) => {
+      this.renderChampionshipList(event.detail);
+    })
   })
 };
 
@@ -47,5 +51,11 @@ ContainerView.prototype.raceListItem = function (race) {
 ContainerView.prototype.raceDetailItem = function (race) {
   const raceDetail = new RaceDetail();
   return raceDetail.createRaceDetail(race);
+};
+
+ContainerView.prototype.renderChampionshipList = function (standingsArray) {
+  const championshipList = new ChampionshipView();
+  const list =  championshipList.createChampionshipStandings(standingsArray);
+  this.container.appendChild(list);
 };
 module.exports = ContainerView;
