@@ -12,7 +12,7 @@ Formula1Stats.prototype.bindEvents = function () {
     const selectedSeason = event.detail;
     this.selectedSeasonRaces(selectedSeason);
     this.selectedSeasonDetails(selectedSeason);
-    this.selectedChampionshipStandings(selectedSeason)
+    // this.selectedChampionshipStandings(selectedSeason);
   })
   this.getData();
 };
@@ -46,6 +46,7 @@ Formula1Stats.prototype.selectedSeasonDetails = function (selectedSeason) {
   myPromise.then((data) => {
     this.seasonDetail = this.handleRaceData(data);
     PubSub.publish('Formula1Stats:race-details-ready', this.seasonDetail);
+    this.selectedChampionshipStandings(selectedSeason);
   })
 };
 

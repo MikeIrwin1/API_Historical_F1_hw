@@ -12,6 +12,7 @@ ContainerView.prototype.bindEvents = function () {
     this.clear();
     this.renderRaceListView(event.detail);
     PubSub.subscribe('Formula1Stats:standings-ready', (event) => {
+      debugger
       this.renderChampionshipList(event.detail);
     })
   })

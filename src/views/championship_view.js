@@ -9,6 +9,7 @@ ChampionshipView.prototype.createChampionshipStandings = function (standings) {
   heading.textContent = 'Drivers Championship';
   standingsElement.appendChild(heading);
   const champTable = this.createChampionshipTable(standings);
+  standingsElement.appendChild(champTable);
 
   return standingsElement;
 };
@@ -28,11 +29,11 @@ ChampionshipView.prototype.createChampionshipTable = function (standings) {
 
   standings.forEach((standing) => {
     const newRow = table.insertRow(-1);
-    const name = table.insertCell(0);
-    name.innerHTML = `${standing.Driver.givenName} ${standing.Drive.familyName}`;
-    const constructor = table.insertCell(1);
-    constructor.innerHTML = `${standing.constructors[0].name}`;
-    const points = table.insertCell(2);
+    const name = newRow.insertCell(0);
+    name.innerHTML = `${standing.Driver.givenName} ${standing.Driver.familyName}`;
+    const constructor = newRow.insertCell(1);
+    constructor.innerHTML = `${standing.Constructors[0].name}`;
+    const points = newRow.insertCell(2);
     points.innerHTML = `${standing.points}`;
   })
 
