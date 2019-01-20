@@ -12,7 +12,6 @@ Formula1Stats.prototype.bindEvents = function () {
     const selectedSeason = event.detail;
     this.selectedSeasonRaces(selectedSeason);
     this.selectedSeasonDetails(selectedSeason);
-    // this.selectedChampionshipStandings(selectedSeason);
   })
   this.getData();
 };

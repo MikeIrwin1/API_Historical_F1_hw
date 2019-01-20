@@ -11,11 +11,10 @@ ContainerView.prototype.bindEvents = function () {
   PubSub.subscribe('Formula1Stats:race-details-ready', (event) => {
     this.clear();
     this.renderRaceListView(event.detail);
-    PubSub.subscribe('Formula1Stats:standings-ready', (event) => {
-      debugger
-      this.renderChampionshipList(event.detail);
-    })
-  })
+  });
+  PubSub.subscribe('Formula1Stats:standings-ready', (event) => {
+    this.renderChampionshipList(event.detail);
+  });
 };
 
 ContainerView.prototype.clear = function () {
@@ -23,12 +22,19 @@ ContainerView.prototype.clear = function () {
 };
 
 ContainerView.prototype.renderRaceListView = function (raceArray) {
+  const races = document.createElement('div');
+  races.classList.add('seasons-races');
+  const heading = document.createElement('h2');
+  heading.textContent = 'Seasons Races';
+  races.appendChild(heading);
+
   raceArray.forEach((race) => {
     const raceView = this.raceListItem(race);
     const raceDetailView = this.raceDetailItem(race);
-    this.container.appendChild(raceView);
-    this.container.appendChild(raceDetailView);
+    races.appendChild(raceView);
+    races.appendChild(raceDetailView);
   });
+  this.container.appendChild(races);
   const collapse = document.getElementsByClassName('race')
   for (let i=0; i<collapse.length; i++) {
     collapse[i].addEventListener('click', (event) => {

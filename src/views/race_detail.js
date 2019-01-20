@@ -18,7 +18,7 @@ RaceDetail.prototype.createRaceDetail = function (race) {
 
 RaceDetail.prototype.createHeading = function () {
   const results = document.createElement('h4');
-  results.textContent = 'Results';
+  results.textContent = 'Podium';
   return results;
 };
 
