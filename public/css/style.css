@@ -37,6 +37,10 @@ button {
   max-height: 50px;
 }
 
+button:hover {
+  background-color: rgba(110, 110, 110, 0.8)
+}
+
 .championship-wrapper{
   grid-area:standings;
   max-height: 100%;
@@ -45,7 +49,7 @@ button {
 }
 
 .championship-wrapper table {
-  background-color: rgba(110, 110, 110, 0.35);
+  background-color: rgba(110, 110, 110, 0.5);
   border-radius: 12px;
   text-shadow: 2px 2px 8px white;
   align-items: center;
@@ -56,15 +60,16 @@ nav {
   width: 100px;
 }
 .race {
+  margin-top: 5px;
   font-family: f1font;
   display: block;
-  background-color: rgba(110, 110, 110, 0.35);
+  background-color: rgba(110, 110, 110, 0.5);
   color: black;
   text-shadow: 2px 2px 8px white;
   cursor: pointer;
   padding: 12px;
   width: 475px;
-  border: none;
+  border: 1px solid black;
   text-align: left;
   outline: none;
   font-size: 15px;
@@ -72,7 +77,8 @@ nav {
 }
 
 .seasons-races .results {
-  padding: 0;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
   max-height: 500px;
   width: 475px;
   overflow: hidden;
